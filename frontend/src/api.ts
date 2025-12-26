@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Course, CourseInput } from './types';
+import type { Course, CourseInput } from './types';
 
 const API_BASE_URL = 'http://localhost:3000/api';
 
