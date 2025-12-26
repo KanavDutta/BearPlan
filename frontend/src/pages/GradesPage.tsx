@@ -61,7 +61,8 @@ export default function GradesPage() {
 
   const loadGradeData = async (courseId: number) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/grades/${courseId}`);
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+      const response = await fetch(`${API_URL}/api/grades/${courseId}`);
       const data = await response.json();
       setGradeData(data);
     } catch (error) {
@@ -73,7 +74,8 @@ export default function GradesPage() {
     if (!selectedCourse || !targetGrade) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/api/grades/${selectedCourse}/target`, {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+      const response = await fetch(`${API_URL}/api/grades/${selectedCourse}/target`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ targetGrade: parseFloat(targetGrade) })

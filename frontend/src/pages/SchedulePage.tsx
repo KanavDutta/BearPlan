@@ -33,8 +33,9 @@ export default function SchedulePage() {
   const loadSchedule = async () => {
     setLoading(true);
     try {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
       const startDate = new Date().toISOString().split('T')[0];
-      const response = await fetch(`http://localhost:3000/api/schedule?startDate=${startDate}`);
+      const response = await fetch(`${API_URL}/api/schedule?startDate=${startDate}`);
       const data = await response.json();
       
       // Convert allocated_hours from string to number if needed
@@ -105,7 +106,8 @@ export default function SchedulePage() {
   const generateSchedule = async () => {
     setGenerating(true);
     try {
-      const response = await fetch('http://localhost:3000/api/schedule/generate', {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+      const response = await fetch(`${API_URL}/api/schedule/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
       });
@@ -128,7 +130,8 @@ export default function SchedulePage() {
 
   const updateProgress = async (sessionId: number, status: 'completed' | 'partial' | 'missed', actualHours?: number) => {
     try {
-      const response = await fetch('http://localhost:3000/api/progress', {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+      const response = await fetch(`${API_URL}/api/progress`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
